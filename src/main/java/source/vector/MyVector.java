@@ -1,4 +1,4 @@
-package source;
+package source.vector;
 
 public class MyVector {
 }
