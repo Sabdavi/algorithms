@@ -7,7 +7,7 @@ public class HeapSort {
 
     public HeapSort(int[] tree) {
         this.tree = tree;
-        this.heapSize = tree.length;
+        this.heapSize = 0;
     }
 
     private void maxHeapify(int index) {
@@ -47,6 +47,46 @@ public class HeapSort {
             heapSize--;
             maxHeapify( 0);
         }
+    }
+
+    public int extract_max(){
+        if(heapSize < 0 ){
+            System.out.println("Under Fellow");
+        }
+        int max = tree[0];
+        heapSize--;
+        tree[0] = tree[heapSize];
+        maxHeapify(0);
+        return max;
+    }
+
+    public void printHeap(){
+        for(int i = 0 ; i < heapSize ; i++){
+            System.out.println(tree[i]);
+        }
+    }
+
+    public void printTree(){
+        for(int i = 0 ; i < tree.length ; i++){
+            System.out.println(tree[i]);
+        }
+    }
+
+    public void increaseKey(int i , int key){
+        tree[i] = key;
+        while(i > 0 && tree[findParent(i)] < tree[i]){
+            int temp = tree[findParent(i)];
+            tree[findParent(i)] = tree[i];
+            tree[i] = temp;
+            i = findParent(i);
+        }
+    }
+
+    public void insert(int key){
+        tree[heapSize] = Integer.MIN_VALUE;
+        increaseKey(heapSize,key);
+        heapSize++;
+
     }
 
     private int findParent(int index) {
